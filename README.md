@@ -29,3 +29,5 @@ In acest moment nu exista o versiune incipienta, de test, a jocului.
 **Note:** exista un bug care nu lasa jucatorul sa se miste in anumite generari ale hartii. Lucram sa il rezolvam.
 
 ---
+
+Dorim sa primim raportul de recenzie in mesaj pe teams, la Baidoc Robert Cristian
