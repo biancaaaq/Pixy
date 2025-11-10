@@ -13,7 +13,9 @@ Scopul principal nu este doar finalizarea nivelului, ci si obtinerea unor achiev
 
 - Baidoc Robert – grupa 344  
 - Husanu Bianca – grupa 344  
-- Udriste Andrei – grupa 344  
+- Udriste Andrei – grupa 344
+- Buhnia Tudor - grupa 332
+- Moise Andrei Marian - grupa 332
 
 
 ## How to play
