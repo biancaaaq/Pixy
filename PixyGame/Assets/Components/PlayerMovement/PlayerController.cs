@@ -76,21 +76,6 @@ public class PlayerController : MonoBehaviour
         return hit != null;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (playerCollider == null) return;
-
-        float footOffset = 0.05f;
-        Vector2 capsuleCenter = (Vector2)playerCollider.bounds.center;
-        float halfHeight = playerCollider.bounds.extents.y;
-
-        Vector2 boxCenter = capsuleCenter + Vector2.down * (halfHeight + footOffset);
-        Vector2 boxSize = new Vector2(playerCollider.bounds.size.x * 0.9f, 0.1f);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCenter, boxSize);
-    }
-
     private void CheckDash(int direction)
     {
         if (lastMoveDirection == direction && Time.time - lastTapTime <= doubleTapTime)
