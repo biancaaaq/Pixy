@@ -45,6 +45,7 @@ public class LoadingScreenBackgroundGenerator : MonoBehaviour
             block.transform.parent = transform;
             SpriteRenderer sr = block.AddComponent<SpriteRenderer>();
             sr.sprite = (j == height - 1) ? grass : dirt;
+            block.layer = LayerMask.NameToLayer("Ground");
             BoxCollider2D collider = block.AddComponent<BoxCollider2D>();
         }
     }
