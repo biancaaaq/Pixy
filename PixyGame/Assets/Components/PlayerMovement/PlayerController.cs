@@ -1,12 +1,19 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(TrailRenderer))]
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = PlayerMovementConstants.moveSpeed;
     public float jumpForce = PlayerMovementConstants.jumpForce;
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.2f;
+    public float dashSpeed = PlayerMovementConstants.dashSpeed;
+    public float dashDuration = PlayerMovementConstants.dashDuration;
+
+    public int lives = PlayerMovementConstants.lives;
     private bool isDashing = false;
     private int lastMoveDirection = 0;
     private float lastTapTime = 0f;
@@ -21,7 +28,6 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private TrailRenderer trailRenderer;
-    private int lives = 3;
     private bool isDead = false;
 
     private void Start()
@@ -126,14 +132,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HandleHit(Transform slime)
     {
-        isHit = true;
         lives--;
-
-        if (lives <= 0)
-        {
-            animator.SetTrigger("isDead");
-        }
-
+        isHit = true;
         animator.SetTrigger("isHit");
 
         Vector2 knockback = (transform.position - slime.position).normalized * 5f;
@@ -144,5 +144,12 @@ public class PlayerController : MonoBehaviour
 
         if (lives > 0)
             isHit = false;
+        else
+        {
+            if (!isDead)
+            {
+                animator.SetTrigger("isDead");
+            }
+        }
     }
 }

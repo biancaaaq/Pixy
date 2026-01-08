@@ -6,4 +6,7 @@ public static class PlayerMovementConstants
     public static readonly float groundCheckRadius = 0.2f;
     public static readonly float gravityScale = 3f;
     public static readonly float doubleTapTime = 0.3f;
+    public static readonly float dashSpeed = 20f;
+    public static readonly float dashDuration = 0.2f;
+    public static readonly int lives = 3;
 }
