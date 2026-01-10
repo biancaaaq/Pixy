@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ab7d48d18fdf3054bad5ade4ea385bd8
+guid: 517f08ce427ac7d469be54e35d0d7680
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2353765023112582224
-    second: death33_0
+      213: -1890818448623389409
+    second: death3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: death33_0
+      name: death3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 13
-        height: 18
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0545d5751d04aa020800000000000000
-      internalID: 2353765023112582224
+      spriteID: f153c0393a672c5e0800000000000000
+      internalID: -1890818448623389409
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      death33_0: 2353765023112582224
+      death3_0: -1890818448623389409
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4,6 +4,7 @@ public class RuntimeSpriteSheetAnimator : MonoBehaviour
 {
     public Sprite[] frames;
     public float framesPerSecond = 12f;
+
     private SpriteRenderer spriteRenderer;
     private int currentFrame = 0;
     private float timer = 0f;
