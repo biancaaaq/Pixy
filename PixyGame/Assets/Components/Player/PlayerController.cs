@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private TrailRenderer trailRenderer;
     private bool isDead = false;
 
+    public int coinsPicked = 0;
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -119,14 +121,16 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(HandleHit(collision.transform));
         }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Lava"))
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Coin"))
         {
-            if (!isDead)
-            {
-                isDead = true;
-                animator.SetTrigger("isDead");
-                rigidBody.linearVelocity = Vector2.zero;
-            }
+            Debug.Log("touched coin");
+            coinsPicked++;
+            Coin coin = collision.gameObject.GetComponent<Coin>();
+            StartCoroutine(coin.HandleCoinPick());
         }
     }
 
@@ -139,8 +143,9 @@ public class PlayerController : MonoBehaviour
         Vector2 knockback = (transform.position - slime.position).normalized * 5f;
         rigidBody.linearVelocity = new Vector2(knockback.x, 5f);
 
-        float hitDuration = 0.5f;
-        yield return new WaitForSeconds(hitDuration);
+        yield return new WaitForSeconds(0.5f);
+
+        rigidBody.linearVelocity = new Vector2(0f, rigidBody.linearVelocity.y);
 
         if (lives > 0)
             isHit = false;
@@ -155,6 +160,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnDeathAnimationFinished()
     {
-        gameController.EndGame(3);
+        gameController.EndGame(coinsPicked);
     }
 }
