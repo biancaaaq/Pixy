@@ -14,6 +14,7 @@ public class GameOverScreen : MonoBehaviour
     public void Setup(int nrCoins)
     {
         gameObject.SetActive(true);
+        ButtonAudioManager.Instance.RegisterAllButtons();
         coinsText.text = nrCoins.ToString() + " coins";
     }
 
