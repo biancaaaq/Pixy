@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     public Tilemap cave;
     public AudioSource surfaceMusic;
     public AudioSource caveMusic;
-    public AudioSource buttonPresses;
     public Transform Player;
     private bool inCave = false;
     public void Start()

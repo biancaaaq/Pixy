@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class ButtonAudioManager : MonoBehaviour
 {
     public static ButtonAudioManager Instance;
-    public AudioSource clickSound;
+    public AudioSource audioSource;
     private void Awake()
     {
         if (Instance == null)
@@ -35,6 +35,11 @@ public class ButtonAudioManager : MonoBehaviour
 
     private void PlayClickSound()
     {
-        clickSound.PlayOneShot(clickSound.clip);
+        audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
