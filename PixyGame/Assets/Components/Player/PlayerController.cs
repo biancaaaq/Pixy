@@ -8,6 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(TrailRenderer))]
 public class PlayerController : MonoBehaviour
 {
+    public GameController gameController;
     public float moveSpeed = PlayerMovementConstants.moveSpeed;
     public float jumpForce = PlayerMovementConstants.jumpForce;
     public float dashSpeed = PlayerMovementConstants.dashSpeed;
@@ -125,7 +126,6 @@ public class PlayerController : MonoBehaviour
                 isDead = true;
                 animator.SetTrigger("isDead");
                 rigidBody.linearVelocity = Vector2.zero;
-                isHit = true;
             }
         }
     }
@@ -151,5 +151,10 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("isDead");
             }
         }
+    }
+
+    public void OnDeathAnimationFinished()
+    {
+        gameController.EndGame(3);
     }
 }
