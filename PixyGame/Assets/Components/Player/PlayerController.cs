@@ -127,10 +127,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Coin"))
         {
-            Debug.Log("touched coin");
             coinsPicked++;
             Coin coin = collision.gameObject.GetComponent<Coin>();
             StartCoroutine(coin.HandleCoinPick());
+            if (coinsPicked == 3)
+            {
+                AchievementEntity coinsPickedAchievement = AchievementManager.Instance.GetAchievementByCode("allCoins");
+                gameController.DisplayAchivement(coinsPickedAchievement);
+            }
+
         }
     }
 

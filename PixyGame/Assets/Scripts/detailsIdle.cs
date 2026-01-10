@@ -4,9 +4,7 @@ public class TilemapIdleEffect : MonoBehaviour
 {
     public float swayAmplitudeX = 0.08f;
     public float swaySpeedX = 1f;
-
     private Vector3 initialPosition;
-
     void Start()
     {
         initialPosition = transform.position;

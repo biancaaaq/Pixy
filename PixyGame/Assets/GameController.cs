@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     public AudioSource surfaceMusic;
     public AudioSource caveMusic;
     public Transform Player;
+
+    public AchievementRendererTest achievementRenderer;
     private bool inCave = false;
     public void Start()
     {
@@ -40,6 +42,11 @@ public class GameController : MonoBehaviour
     private void PlayCaveMusic()
     {
         caveMusic.Play();
+    }
+
+    public void DisplayAchivement(AchievementEntity achivement)
+    {
+        achievementRenderer.Initialize(achivement);
     }
 
 }
