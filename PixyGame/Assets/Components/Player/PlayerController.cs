@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Tilemaps;
+using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = PlayerMovementConstants.jumpForce;
     public float dashSpeed = PlayerMovementConstants.dashSpeed;
     public float dashDuration = PlayerMovementConstants.dashDuration;
-
     public int lives = PlayerMovementConstants.lives;
     private bool isDashing = false;
     private int lastMoveDirection = 0;
@@ -29,9 +30,14 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private TrailRenderer trailRenderer;
+    public Tilemap swimmableWater;
     private bool isDead = false;
-
     public int coinsPicked = 0;
+
+    private bool canJump = true;
+    private bool canDash = true;
+
+    private bool isSwimming = false;
 
     private void Start()
     {
@@ -50,7 +56,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (isHit) return;
+        if (isHit)
+            return;
+
+        CheckIfSwimming();
+
         animator.SetBool("isHit", false);
 
         float moveInput = Input.GetAxisRaw("Horizontal");
@@ -64,7 +74,7 @@ public class PlayerController : MonoBehaviour
         bool isGrounded = IsGrounded();
         if (isGrounded) jumpCount = 0;
 
-        if (Input.GetButtonDown("Jump") && jumpCount < 1)
+        if (Input.GetButtonDown("Jump") && jumpCount < 1 && canJump)
         {
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpForce);
             jumpCount++;
@@ -74,6 +84,32 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) CheckDash(1);
 
         UpdateAnimation(moveInput, isGrounded);
+    }
+
+    private void CheckIfSwimming()
+    {
+        Vector3Int playerCell = swimmableWater.WorldToCell(rigidBody.position);
+
+        Vector3Int belowCell = new Vector3Int(playerCell.x, playerCell.y, playerCell.z);
+
+        bool inWater = swimmableWater.HasTile(belowCell);
+
+        Debug.Log(inWater);
+
+        if (inWater && !isSwimming)
+        {
+            isSwimming = true;
+            canDash = false;
+            canJump = false;
+            moveSpeed = PlayerMovementConstants.swimSpeed;
+        }
+        else if (!inWater && isSwimming)
+        {
+            isSwimming = false;
+            canDash = true;
+            canJump = true;
+            moveSpeed = PlayerMovementConstants.moveSpeed;
+        }
     }
 
     private void UpdateAnimation(float moveInput, bool isGrounded)
@@ -94,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckDash(int direction)
     {
-        if (lastMoveDirection == direction && Time.time - lastTapTime <= doubleTapTime)
+        if (lastMoveDirection == direction && Time.time - lastTapTime <= doubleTapTime && canDash)
         {
             StartCoroutine(StartDashing(direction));
         }
